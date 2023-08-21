@@ -1,27 +1,21 @@
-import { StyleSheet } from 'react-native';
-import { EventRegister } from 'react-native-event-listeners';
-import Maps from '../../components/maps';
-import { Text, View } from '../../components/Themed';
-import React, { useState, useEffect } from 'react';
-import App from "../../components/fetch";
-import { Double } from 'react-native/Libraries/Types/CodegenTypes';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import App from '../../components/fetch';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../navigation';
 
-
-type Restaurant = {
-  title: string;
-  description: string;
-  latitude: Double;
-  longitude: Double;
+type TabTwoScreenProps = {
+  // Remove the navigation prop from here
 };
 
-
 export default function TabTwoScreen() {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-    <App></App>
-  </View>
-
+      <App navigation={navigation} />
+    </View>
   );
 }
 
@@ -30,14 +24,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });

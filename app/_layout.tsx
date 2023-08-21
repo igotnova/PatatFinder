@@ -5,6 +5,11 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 
+export type RootStackParamList = {
+  TabOne: undefined;
+  TabTwo: undefined;
+  // ... other screens
+};
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
