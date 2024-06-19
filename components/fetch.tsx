@@ -13,7 +13,7 @@ type SnackBar = {
 };
 
 type AppProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'TabTwo'>; // Adjust the screen name if needed
+  navigation: StackNavigationProp<RootStackParamList, 'two'>; // Adjust the screen name if needed
 };
 
 const App = ({ navigation }: AppProps) => {

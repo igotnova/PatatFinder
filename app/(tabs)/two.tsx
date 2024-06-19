@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Appearance } from 'react-native';
 import App from '../../components/fetch';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation';
+import { useTheme } from '../../components/ThemeContext';
+import { ThemeProvider } from '../../components/ThemeContext';
 
 type TabTwoScreenProps = {
   // Remove the navigation prop from here
