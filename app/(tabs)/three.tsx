@@ -1,44 +1,43 @@
-import { StyleSheet, Switch ,View, Text } from 'react-native';
-import EditScreenInfo from '../../components/EditScreenInfo';
-// import { Text, View,  } from '../../components/Themed';
-import React, { useState, useEffect , useContext} from 'react';
-import { EventRegister } from 'react-native-event-listeners';
-import themeContext from '../../theme/themeContext';
-import theme from '../../theme/theme';
+import React from 'react';
+import { useTheme, ThemeProvider } from '../context/themeContext';
+import ToggleButton from '../../components/ToggleButton';;
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function TabTwoScreen() {
-  const theme = useContext(themeContext)
-  const [darkMode, setDarkMode] = useState(false)
-  console.log(theme);
-  
+const Three = () => {
+  const { darkMode } = useTheme();
+
   return (
-    <View style={[styles.container, {backgroundColor:theme.background}]}>
-      <View />
-      
-      <Text >darkmode</Text>
-      <Switch
-      value={darkMode}
-      onValueChange={(value) => {setDarkMode(value);
-      EventRegister.emit('ChangeTheme', value)
-      }} 
-      />
+    <View style={[styles.container, darkMode ? styles.dark : styles.light]}>
+      <ToggleButton />
+      <Text style={darkMode ? styles.darkText : styles.lightText}>Hello, World!</Text>
     </View>
   );
-}
+};
+
+const WrappedThree = () => (
+  <ThemeProvider>
+    <Three />
+  </ThemeProvider>
+);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  light: {
+    backgroundColor: '#fff',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  dark: {
+    backgroundColor: '#333',
+  },
+  lightText: {
+    color: '#000',
+  },
+  darkText: {
+    color: '#fff',
   },
 });
+
+export default WrappedThree;
