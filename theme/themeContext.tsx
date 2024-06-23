@@ -1,14 +1,30 @@
-import { types } from "@babel/core";
-import { DarkTheme } from "@react-navigation/native";
-import React, {createContext} from "react";
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
+interface ThemeContextType {
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+}
 
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const themeContext = createContext({
-    theme:'light',
-    color:'black',
-    background:"white"
-});
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [darkMode, setDarkMode] = useState(false);
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-export default themeContext
+  return (
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};

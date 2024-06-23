@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme, ThemeProvider } from '../context/themeContext';
-import ToggleButton from '../../components/ToggleButton';;
+import { useTheme } from '../../theme/themeContext';
+import ToggleButton from '../../components/ToggleButton';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Three = () => {
@@ -13,12 +13,6 @@ const Three = () => {
     </View>
   );
 };
-
-const WrappedThree = () => (
-  <ThemeProvider>
-    <Three />
-  </ThemeProvider>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -40,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WrappedThree;
+export default Three;

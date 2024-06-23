@@ -4,27 +4,53 @@ import App from '../../components/fetch';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation';
-import { useTheme } from '../../components/ThemeContext';
-import { ThemeProvider } from '../../components/ThemeContext';
 
-type TabTwoScreenProps = {
-  // Remove the navigation prop from here
-};
+import { useTheme, ThemeProvider } from '../context/themeContext';
 
-export default function TabTwoScreen() {
+const Two = () => {
+  const { darkMode } = useTheme();
   const navigation = useNavigation();
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, darkMode ? styles.dark : styles.light]}>
       <App navigation={navigation} />
     </View>
   );
-}
+};
+
+const WrappedTwo = () => (
+  <ThemeProvider>
+    <Two />
+  </ThemeProvider>
+);
+
+// export default function TabTwoScreen() {
+//   const navigation = useNavigation();
+//   const { darkMode } = useTheme();
+//   return (
+//     <View style={[styles.container, darkMode ? styles.dark : styles.light]}>
+//       <App navigation={navigation} />
+//     </View>
+//   );
+// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  light: {
+    backgroundColor: '#fff',
+  },
+  dark: {
+    backgroundColor: '#333',
+  },
+  lightText: {
+    color: '#000',
+  },
+  darkText: {
+    color: '#fff',
   },
 });
+
+export default WrappedTwo;
